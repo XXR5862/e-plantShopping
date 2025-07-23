@@ -2,8 +2,8 @@ import React, { useState,useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from './CreateSlice';
-function ProductList(props) {
+import { addItem } from './CartSlice';
+function ProductList(onHomeClick) {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [cart, setCart] = useState([]); // State to store the items added to the cart
@@ -232,7 +232,7 @@ function ProductList(props) {
         }
     ];
    const styleObj={
-    backgroundColor: '#615EFC',
+    backgroundColor: '#4CAF50',
     color: '#fff!important',
     padding: '15px',
     display: 'flex',
@@ -266,19 +266,23 @@ const handlePlantsClick = (e) => {
     e.preventDefault();
     setShowCart(false);
   };
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    onHomeClick();
+};
     return (
         <div>
-             <div className="navbar" style={styleObj}>
-            <div className="tag">
-               <div style={{cursor:"pointer"}} onClick={props.toLanding} className="luxury">
-               <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
-               <a   style={{textDecoration:'none'}}>
-                        <div>
-                    <h3 style={{color:'white'}}>Ziad's Plants</h3>
-                    <i style={{color:'white'}}>Where Green Meets Serenity</i>
+            <div className="navbar" style={styleObj}>
+                <div className="tag">
+                    <div className="luxury">
+                        <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
+                        <a href="/" onClick={(e) => handleHomeClick(e)}>
+                            <div>
+                                <h3 style={{ color: 'white' }}>Paradise Nursery</h3>
+                                <i style={{ color: 'white' }}>Where Green Meets Serenity</i>
+                            </div>
+                        </a>
                     </div>
-                    </a>
-                </div>
               
             </div>
             <div style={styleObjUl}>
@@ -298,7 +302,7 @@ const handlePlantsClick = (e) => {
                     <h2>{plant.name}</h2>
                     <p>{plant.description}</p>
                     <p>{plant.cost}</p>
-                    <button style={{backgroundColor:alreadyInCart(plant.name)?"gray":"#615EFC"}} disabled={alreadyInCart(plant.name)? true:false} onClick={()=>handleAddToCart({name:plant.name,cost:plant.cost,image:plant.image})} className='product-button'>Add to Cart</button>
+                    <button style={{backgroundColor:alreadyInCart(plant.name)?"gray":"#4CAF50"}} disabled={alreadyInCart(plant.name)? true:false} onClick={()=>handleAddToCart({name:plant.name,cost:plant.cost,image:plant.image})} className='product-button'>Add to Cart</button>
                 </div>)}
                  </div>
             </div>)}
