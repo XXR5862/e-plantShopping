@@ -19,7 +19,7 @@ function ProductList(onHomeClick) {
     }
     const handleAddToCart = (item) => {
         console.log("clicked");
-        dispatch(addItem(item));
+        dispatch(addItem(item)); //things
     }
     const totalItems = () => {
         return cartItems.reduce((total, item) => total + item.quantity, 0);
